@@ -5,6 +5,15 @@
 
 #include <stdio.h>
 
-int main() {
-    printf("%d\n", EOF);
+int main()
+{
+  int c;
+
+  c = getchar() != EOF;
+
+  if (c == 1 || c == 0)
+  {
+    printf("%d\n", c);
+  }
+  return 0;
 }
