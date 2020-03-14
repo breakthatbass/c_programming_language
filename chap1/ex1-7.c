@@ -11,6 +11,8 @@ int main()
 
   c = getchar() != EOF;
 
+  printf("%i\n", EOF);
+
   if (c == 1 || c == 0)
   {
     printf("%d\n", c);
