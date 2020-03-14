@@ -10,11 +10,10 @@ int main()
   int c;
 
   c = getchar() != EOF;
-  
+
   if (c == 1 || c == 0)
   {
     putchar(c);
-    printf("%d\n", c);
   }
   return 0;
 }
