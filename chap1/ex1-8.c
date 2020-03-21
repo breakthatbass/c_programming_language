@@ -30,7 +30,5 @@ int main()
       tabs++;
     }
   }
-  printf("blanks: %d\n", blanks);
-  printf("new lines: %d\n", nl);
-  printf("tabs: %d\n", tabs);
+  printf("blanks: %d\nnew lines: %d\ntabs: %d\n", blanks, nl, tabs);
 }
