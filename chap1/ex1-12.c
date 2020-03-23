@@ -17,7 +17,7 @@ int main()
     }
     else
     {
-      puthar(c);
+      putchar(c);
     }
   }
 
