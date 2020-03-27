@@ -10,6 +10,7 @@ int main()
   int max;
   char line[MAXLINE];
   char longest[MAXLINE];
+  int i;
 
   max = 0;
   while ((len = myGetline(line, MAXLINE)) > 0)
@@ -20,8 +21,21 @@ int main()
       copy(longest, line);
     }
 
-    if (max >= 80) {
-      printf("length: %d\n%s", len - 1, longest);
+    // loop backwards from end of array to get rid of trailling spaces and tabs
+    for (i = len; i >= 0; i--) {
+        if (line[i] == ' ' || line[i] == '\t') {
+            line[i] = '\0';
+        }
+        else if (line[i] == '\n' || line[i] == '\0') {
+            continue;
+        }
+        else {
+            break;
+        }
+    }
+
+    if (max > 0) {
+      printf("length: %d\n%s", i + 1, line);
     }
   }
   return 0;
