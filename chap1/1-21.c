@@ -7,19 +7,22 @@ of tabs and blanks to achieve the same spacing. Use the same tab stops as for
 detab. When either a tab or a single blank would suffice to reach a tab stop,
 which should be given preference?
 
+note: this program is unfinished.
+
 ******************************************/
 #include <stdio.h>
 #define MAXLINE 1000
+#define TABWIDTH 8
 
 int get_line(char line[], int maxline);
-void entab(char s[]);
+void entab(char to[], char from[]);
 
 int main()
 {
 
   char line[MAXLINE];
 
-  while (myGetline(line, MAXLINE) > 0)
+  while (get_line(line, MAXLINE) > 0)
   {
     entab(line);
     printf("%s\n", line);
@@ -45,10 +48,10 @@ int get_line(char s[], int lim)
   return i;
 }
 
-void entab(char s[])
+void entab(char to[], char from[])
 {
-  int len, i, p, c, max;
 
+  int i;
   int tab = 3;
   int space = 1;
   int space_count = 0;
@@ -57,15 +60,12 @@ void entab(char s[])
   i = 0;
   while ((to[i] = from[i]) != '\0') {
     i++;
-  }
 
-  for (p = 1; (c = getchar()) != EOF; p++)
-  {
     if (line[i] == ' ') {
       space_count++;
     }
     if (line[i] == '\t') {
       tab_count++;
     }
-
+  }
 }

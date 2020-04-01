@@ -35,7 +35,7 @@ int myGetline(char s[], int lim)
   {
     s[i] = c;
   }
-  
+
   if (c == '\n') {
     s[i] = c;
     i++;
@@ -54,5 +54,4 @@ void copy(char to[], char from[])
   while ((to[i] = from[i]) != '\0') {
     i++;
   }
-  
 }
