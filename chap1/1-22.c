@@ -11,8 +11,8 @@ int main () {
   {
     if (i == N - 1)
     {
-      putchar(c);
-      putchar('\n');
+        putchar(c);
+        putchar('\n');
     }
     else {
       putchar(c);
