@@ -5,7 +5,7 @@ int main()
     int letters[26];
     int c, i, j;
 
-    for (i = 0; i <= 26; i++)
+    for (i = 0; i < 26; i++)
     {
         letters[i] = 0;
     }
@@ -17,7 +17,7 @@ int main()
             letters[c - 'a']++;
         }
     }
-    for (i = 0; i <= 26; i++)
+    for (i = 0; i < 26; i++)
     {
         printf("%c: ", 'a' + i);
         for (j = 0; j < letters[i]; j++)
@@ -25,5 +25,9 @@ int main()
             putchar('#');
         }
         putchar('\n');
+    }
+
+    for (i = 0; i < 26; i++) {
+      printf("%d\n", letters[i]);
     }
 }
