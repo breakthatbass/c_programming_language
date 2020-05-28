@@ -10,10 +10,11 @@ every n columns. Should n be a variable or symbolic parameter?
 
 #include <stdio.h>
 
-int main () {
+int main ()
+{
 
   int c, i;
-  int tab = 3;
+  int tab = 5;
 
 // get input with getchar()
   while ((c = getchar()) != EOF)
