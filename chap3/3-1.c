@@ -23,7 +23,7 @@ int binsearch(int x, int v[], int n) // n is length of v[]
     {
       high = mid - 1;
     }
-    else if (x > v[mid])
+    else
     {
       low = mid + 1;
     }
