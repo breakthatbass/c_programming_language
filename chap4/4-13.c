@@ -1,37 +1,38 @@
 /*
-  reverse a string
+  write a recursive version of the function reverse(s), which reverses a string in place.
 */
 #include <stdio.h>
 #include <string.h>
 
-void reverse(char s[])
+void swap(char s[], int i, int j)
 {
-  int c, i, j;
-  int len = strlen(s) - 1;
+	char tmp = s[j];
+	s[j] = s[i];
+	s[i] = tmp;
+}
 
-  // this weird loop has two indices
-  // basically starts at the beginning and end and both work towards the middle
-  for (i = 0, j = len; i < j; i++, j--)
-  {
-    c = s[i];
-    s[i] = s[j];
-    s[j] = c;
-  }
+void reverse(char s[], int l, int r)
+{
+    if (l >= r) {
+      return;
+    }
+    swap(s, l, r);
+    ++l, --r;
+    reverse(s, l, r);
 }
 
 // tests
 int main()
 {
-  char one[] = "hello world";
-  char two[] = "It's a beautiful day today";
+    char one[] = "hello world";
+    char two[] = "It's a beautiful day today";
 
-  printf("orignal string: %s\n", one);
-  reverse(one);
-  printf("reversed string: %s\n", one);
-  printf("orignal string: %s\n", two);
-  reverse(two);
-  printf("reversed string: %s\n", two);
+    printf("orignal string: %s\n", one);
+    reverse(one, 0, strlen(one) - 1);
+    printf("reversed string: %s\n", one);
+    printf("orignal string: %s\n", two);
+    reverse(two, 0, strlen(two) - 1);
+    printf("reversed string: %s\n", two);
 
-  return 0;
+    return 0;
 }
-``
