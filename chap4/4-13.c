@@ -6,9 +6,9 @@
 
 void swap(char s[], int i, int j)
 {
-	char tmp = s[j];
-	s[j] = s[i];
-	s[i] = tmp;
+	  char tmp = s[j];
+	  s[j] = s[i];
+	  s[i] = tmp;
 }
 
 void reverse(char s[], int l, int r)
