@@ -1,9 +1,9 @@
 /**
+ * Exercise 5-2: write getfloat, the floating point analog of getint.
  * 
- * Exercise 5-1: As written, getint trats a + or - not followed by a digit as a 
- * valid representation of zero. Fix it to push such a character back onto the input
- * 
+ * buggy....
  * */
+
 
 #include <stdio.h>
 #include <ctype.h>
@@ -13,13 +13,15 @@
 int getch(void);
 void ungetch(int);
 
-int getint(int *pn)
+int getfloat(float *pn)
 {
     int c, sign;
+    float power;
 
     while(isspace(c = getch()))     // skip white space
         ;
-    if (!isdigit(c) && c != EOF && c != '+' && c != '-') {
+
+    if (!isdigit(c) && c != EOF && c != '+' && c != '-' && c != '.') {
         ungetch(c);     // not a number
         return 0;
     }
@@ -32,10 +34,17 @@ int getint(int *pn)
             return 0;
         }
     }
-    for (*pn = 0; isdigit(c); c = getch()) {
-        *pn = 10 * *pn + (c - '0');
+    for (*pn = 0.0; isdigit(c); c = getch()) {
+        *pn = 10.0 * *pn + (c - '0');
     }
-    *pn *= sign;
+    if (c == '.') {
+        c = getch();
+    }
+    for (power = 1.0; isdigit(c); c = getch()) {
+        *pn = 10.0 * *pn + (c - '0');
+        power *= 10;
+    }
+    *pn *= sign/power;
     if (c != EOF) {
         ungetch(c);
     }
@@ -44,19 +53,19 @@ int getint(int *pn)
 
 int main()
 {
-    
-    int n, i, array[SIZE], getint(int *);
+    int n, i, getfloat(float *);
+    float array[SIZE];
 
     for (i = 0; i < SIZE; i++) {
-        array[i] = 0;
+        array[i] = 0.0;
     }
 
-    for (n = 0; n < SIZE && getint(&array[n]) != EOF; n++)
+    for (n = 0; i < SIZE && getfloat(&array[n]) != EOF; n++)
         ;
 
     array[++n] = '\0';
     for (i = 0; array[i] != '\0'; i++) {
-        printf("%d", array[i]);
+        printf("%g", array[i]);
     }
     printf("\n");
     return 0;
