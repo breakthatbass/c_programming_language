@@ -9,9 +9,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAXLEN 20
+
 /* copy at most n characters of string t to s; return s.
  * pad with '\0's if t has fewer than n characters. */
-void strncopy(char *s, char *t, int n)
+void *strncopy(char *s, char *t, int n)
 {
     int t_len = strlen(t);
     int i;
@@ -28,14 +30,15 @@ void strncopy(char *s, char *t, int n)
             *s++ = '\0';
         }
     }
+    return s;
 }
 
 int main()
 {
     char *str1 = "hello";
-    char str2[10];
+    char str2[MAXLEN];
 
-    strncopy(str2, str1, 4);
+    strncopy(str2, str1, 2);
 
     printf("%s\n", str2);
 
