@@ -71,6 +71,27 @@ void itoa(int n, char *s)
     reverse(t);
 }
 
+// return index of t in s, -1 if none
+// come back to this. doesn't work 100%
+int strindex(char *s, char *t)
+{
+    int in = -1;
+    int count = 0;
+    // go through each character and compare
+    int i = 0;
+    while (*s != '\0') {
+        if (*s == *t) {
+            t++;
+            in = i;
+            count++;
+        }
+        i++;
+        s++;
+    }
+    if (count == 0)
+        return -1;
+    return in - (count-1);
+}
 
 
 int main()
@@ -96,6 +117,10 @@ int main()
     char numstr[MAXLINE];
     itoa(num, numstr);
     printf("itoa: %s\n", numstr);
+
+    char *hi = "hello";
+    int hindex = strindex(hi, "e");
+    printf("strindex: %d\n", hindex);
 
     return 0;
 }
