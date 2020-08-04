@@ -56,6 +56,13 @@ char *strncatt(char *s, char *t, int n)
 /* compare at most n characters of string s to string t;
  * return < 0 if s<t, 0 if s == t, or > 0 if s>t. */
 // int strncmp(char *s, char *t, int n)
+int strncomp(char *s, char *t, int n)
+{
+    for ( ; *s == *t & n > 0; s++, t++, n--)
+        if (n == 0)
+            return 0;
+    return *s - *t;
+}
 
 
 int main()
@@ -73,6 +80,11 @@ int main()
     printf("strncat: %s\n", hw);
 
     // strncmp tests
+    char *cflr = "cauliflower";
+    char *cldn = "cauldron";
+    int test1 = strncomp(cflr, cldn, 4);
+    int test2 = strncomp(cflr, cldn, 7);
+    printf("strncmp: 1: %d; 2: %d\n", test1, test2);
 
     return 0;
 }
