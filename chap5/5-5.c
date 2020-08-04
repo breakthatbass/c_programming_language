@@ -8,6 +8,7 @@
  */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAXLEN 20
 
@@ -36,19 +37,19 @@ void *strncopy(char *s, char *t, int n)
 /* concatinate at most n characters of string t to string s,
  * terminate s with '\0'; return s */
 
-// BUGGY
 char *strncatt(char *s, char *t, int n)
 {
-    int i = 0;
-    // go to end of t
-    while (i < strlen(s))
-        *s++;
+    char *tmp = s;
 
-    i = 0;
-    while ((*s++ = *t++) && i < n)
-        i++;
+    while (*++tmp) 
+        ;
 
-    *s++ = '\0';
+    while (n > 0 && t != '\0') {
+        *tmp++ = *t++;
+        n--;
+    }
+    
+    *tmp = '\0';
     return s;
 }
 
@@ -59,21 +60,19 @@ char *strncatt(char *s, char *t, int n)
 
 int main()
 {
+    // strncopy tests
     char *str1 = "hello";
     char str2[MAXLEN];
-
     strncopy(str2, str1, 2);
-
     printf("strncpy: %s\n", str2);
 
-    char h[MAXLEN] = "hello";
-    char w[MAXLEN] = " world";
+    // strncat tests
+    char h[100] = "hello";
+    char *w = " world";
+    char *hw = strncatt(h, w, 4);
+    printf("strncat: %s\n", hw);
 
-    printf("%d\n", strlen(h));
-    
-    strncatt(h, w, 2);
-
-    printf("strncat: %s\n", w);
+    // strncmp tests
 
     return 0;
 }
