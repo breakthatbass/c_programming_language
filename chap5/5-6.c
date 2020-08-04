@@ -31,7 +31,7 @@ int get_line(char *s, int lim)
 void reverse(char *s)
 {
     char *t = s + strlen(s) - 1;
-    char c;
+    int c;
 
     while (s < t) {
         c = *s;
@@ -55,6 +55,21 @@ int _atoi(char *s)
 }
 
 // convert n to characters in s
+void itoa(int n, char *s)
+{
+    int sign;
+    char *t = s;
+    if ((sign = n) < 0)
+        n = -n;
+
+    do {    // generate digits in reverse order
+        *s++ = n % 10 + '0';
+    } while ((n /= 10) > 0);
+    if (sign < 0) 
+        *s++ = '-';
+    *s = '\0';
+    reverse(t);
+}
 
 
 
@@ -66,14 +81,21 @@ int main()
     printf("%d\n", n);
     */
 
-   // atoi tests
-   char *i = "25";
-   int n = _atoi(i);
-   printf("atoi: %d\n", n);
+    // atoi tests
+    char *i = "25";
+    int n = _atoi(i);
+    printf("atoi: %d\n", n);
 
-   char *s = "hello";
-   reverse(s);
-   printf("reverse: %s\n", s);
+    // reverse tests
+    char s[MAXLINE] = "hello";
+    reverse(s);
+    printf("reverse: %s\n", s);
+
+    // itoa tests
+    int num = 123;
+    char numstr[MAXLINE];
+    itoa(num, numstr);
+    printf("itoa: %s\n", numstr);
 
     return 0;
 }
