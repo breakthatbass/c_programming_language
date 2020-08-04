@@ -59,8 +59,12 @@ char *strncatt(char *s, char *t, int n)
 int strncomp(char *s, char *t, int n)
 {
     for ( ; *s == *t && n > 0; s++, t++, n--)
-        if (n == 0)
+        if (*s == '\0')
             return 0;
+
+    if (n == 0)
+        return 0;
+
     return *s - *t;
 }
 
@@ -76,7 +80,7 @@ int main()
     // strncat tests
     char h[100] = "hello";
     char *w = " world";
-    char *hw = strncatt(h, w, 4);
+    char *hw = strncatt(h, w, 3);
     printf("strncat: %s\n", hw);
 
     // strncmp tests
