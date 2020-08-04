@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <ctype.h>
 
 #define MAXLINE 1000
 
@@ -26,11 +27,30 @@ int get_line(char *s, int lim)
     return i;
 } 
 
+// convert s to integer
+int atoi(char *s)
+{
+    int i, n;
+
+    n = 0;
+    for (i = 0; isdigit(*s); ++s, ++i)
+        n = 10*n + (*s - '0');
+    return n;
+}
+
+
 int main()
 {
+    /*
     char line[MAXLINE];
     int n = get_line(line, MAXLINE);
     printf("%d\n", n);
+    */
+
+   // atoi tests
+   char *i = "25";
+   int n = atoi(i);
+   printf("%d\n", n);
 
     return 0;
 }
