@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 #define MAXLINE 1000
 
@@ -26,6 +27,21 @@ int get_line(char *s, int lim)
     *s = '\0';
     return i;
 } 
+
+void reverse(char *s)
+{
+    char *t = s + strlen(s) - 1;
+    char c;
+
+    while (s < t) {
+        c = *s;
+        *s = *t;
+        *t = c;
+        s++;
+        t--;
+    }
+}
+
 
 // convert s to integer
 int _atoi(char *s)
@@ -53,7 +69,11 @@ int main()
    // atoi tests
    char *i = "25";
    int n = _atoi(i);
-   printf("%d\n", n);
+   printf("atoi: %d\n", n);
+
+   char *s = "hello";
+   reverse(s);
+   printf("reverse: %s\n", s);
 
     return 0;
 }
