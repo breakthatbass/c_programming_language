@@ -35,7 +35,6 @@ void *strncopy(char *s, char *t, int n)
 
 /* concatinate at most n characters of string t to string s,
  * terminate s with '\0'; return s */
-
 char *strncatt(char *s, char *t, int n)
 {
     char *tmp = s;
@@ -54,7 +53,6 @@ char *strncatt(char *s, char *t, int n)
 
 /* compare at most n characters of string s to string t;
  * return < 0 if s<t, 0 if s == t, or > 0 if s>t. */
-// int strncmp(char *s, char *t, int n)
 int strncomp(char *s, char *t, int n)
 {
     for ( ; *s == *t && n > 0; s++, t++, n--)
