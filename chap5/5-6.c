@@ -28,7 +28,7 @@ int get_line(char *s, int lim)
 } 
 
 // convert s to integer
-int atoi(char *s)
+int _atoi(char *s)
 {
     int i, n;
 
@@ -37,6 +37,9 @@ int atoi(char *s)
         n = 10*n + (*s - '0');
     return n;
 }
+
+// convert n to characters in s
+
 
 
 int main()
@@ -49,7 +52,7 @@ int main()
 
    // atoi tests
    char *i = "25";
-   int n = atoi(i);
+   int n = _atoi(i);
    printf("%d\n", n);
 
     return 0;
