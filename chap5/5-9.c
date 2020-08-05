@@ -1,6 +1,6 @@
 /*
- * Exercise 5-8: There is no error checking in day_of_year
- * or month_day. Remedy this defect.
+ * Exercise 5-9: Rewrite the routines day_of_year and month_day
+ * with pointers instead of indexing.
  */
 
 #include <stdio.h>
@@ -16,6 +16,7 @@ int get_digits(int);
 int day_of_year(int year, int month, int day)
 {
     int i, leap;
+    char *p;
 
     // check for wrong amount of digits
     if (get_digits(year) != 4 || get_digits(month) > 2 || get_digits(day) > 2) {
@@ -30,8 +31,10 @@ int day_of_year(int year, int month, int day)
 
     // leap is 0 if not a leap year, 1 if it is
     leap = (year%4 == 0 && year%100 != 0) || year%400 == 0;
+
+    p = daytab[leap];
     for (i = 1; i < month; i++)
-        day += daytab[leap][i];
+        day += *++p;
     return day;
 } 
 
@@ -39,6 +42,7 @@ int day_of_year(int year, int month, int day)
 void month_day(int year, int yearday, int *pmonth, int *pday)
 {
     int i, leap;
+    char *p;
 
     // check for wrong amount of digits
     if (get_digits(year) != 4 || get_digits(yearday) > 3) {
@@ -52,8 +56,10 @@ void month_day(int year, int yearday, int *pmonth, int *pday)
     }
 
     leap = (year%4 == 0 && year%100 != 0) || year%400 == 0;
-    for (i = 1; yearday > daytab[leap][i]; i++)
-        yearday -= daytab[leap][i];
+
+    p = daytab[leap];
+    for (i = 1; yearday > *++p; i++)
+        yearday -= *p;
     *pmonth = i;
     *pday = yearday;
 }
@@ -61,7 +67,7 @@ void month_day(int year, int yearday, int *pmonth, int *pday)
 int main()
 {
     int month = 8;
-    int day = 4;
+    int day = 5;
 
     int m;
     int d;
