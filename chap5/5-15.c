@@ -1,5 +1,12 @@
+/**
+ * Exercise 5-15: Add the option -f to fold upper and lower case together, 
+ * so that case distinctions are not made during sorting; for example, 
+ * a and A compare equal
+ * */ 
+
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAXLINES 5000   
 #define MAXLEN 1000        // manx # lines to be sorted
@@ -14,6 +21,7 @@ int get_line(char *s, int lim);
 void q_sort(void *lineptr[], int left, int right, 
             int reverse, int (*comp)(void *, void *));
 int numcmp(char *, char *);
+int chrcmp(char *s, char *t);
 // *********************************
 
 
@@ -24,6 +32,7 @@ int main(int argc, char *argv[])
     int nlines;         // number of input lines read
     int numeric = 0;    // 1 if numeric sort
     int reverse = 0;    // 1 if reverse sort
+    int fold = 0;       // 1 if sorting doesn't compare lower and upper case
 
     while (--argc > 0 && (*++argv)[0] == '-') 
         while((c = *++argv[0]))
@@ -34,6 +43,9 @@ int main(int argc, char *argv[])
                 case 'r':
                     reverse = 1;
                     break;
+                case 'f':
+                    fold = 1;
+                    break;
                 default:
                     printf("%c is not an option!!\n", c);
                     return 1;
@@ -41,7 +53,10 @@ int main(int argc, char *argv[])
 
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
         // these qsort arguments are rediculous
-        q_sort((void **) lineptr, 0, nlines-1, reverse, (int (*)(void*, void*))(numeric ? numcmp : strcmp));
+        if (fold)
+            q_sort((void **) lineptr, 0, nlines-1, reverse, (int (*)(void*, void*))chrcmp);
+        else
+            q_sort((void **) lineptr, 0, nlines-1, reverse, (int (*)(void*, void*))(numeric ? numcmp : strcmp));
     writelines(lineptr, nlines);
     return 0;
     } else {
@@ -152,3 +167,11 @@ int get_line(char *s, int lim)
     return i;
 } 
 // ********************************* 
+
+int chrcmp(char *s, char *t)
+{
+    for ( ; tolower(*s) == tolower(*t); s++, t++)
+        if (*s == '\0')
+            return 0;
+    return tolower(*s) - tolower(*t);
+}
