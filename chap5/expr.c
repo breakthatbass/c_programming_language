@@ -2,6 +2,8 @@
  * exercise 5-10: Write the program expr, which evaluates a reverse 
  * Polish expression from teh command line, where each operator 
  * or operand is a separate argument.
+ * 
+ * ...kinda buggy
  **/
 
 #include <stdio.h>
