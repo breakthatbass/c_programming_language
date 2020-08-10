@@ -6,10 +6,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAXLINE 500
 
-void detab(char *s, int lim)
+void detab(int lim)
 {
     int c, i;
     int tab = 5;
@@ -22,21 +23,17 @@ void detab(char *s, int lim)
             for (i = 0; i < lim; i++) {
                 c = ' ';
                 putchar(c);
-                *s++ = c;
             }
         }
         // else just putchar() normal way
         else 
             putchar(c);
-            *s++ = c;
     }
-    *s = '\0';
 }
 
 int main(int argc, char *argv[])
 {
-    int tab, i;
-    char s[MAXLINE];
+    int tab;
 
     if (argc == 1) 
         tab = 5;
@@ -47,7 +44,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     
-    detab(s, tab);
-
+    detab(tab);
+    
     return 0;
 }
