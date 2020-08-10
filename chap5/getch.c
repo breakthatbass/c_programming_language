@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-//#include "getch.h"
+#include "getch.h"
 
 #define BUFSIZE 100
 
