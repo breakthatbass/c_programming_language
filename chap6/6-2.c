@@ -4,6 +4,9 @@
 * in the first 6 characters, but different somewhere thereafter. 
 * Don't count the words within strings and comments. Make 6 a parameter
 * that can be set from the command line
+*
+* this solution comes from The C Answer Book by Clovis Tondo
+* and Scott Gimpel on pages 153, 154, & 155.
 **/
 
 #include <stdio.h>
@@ -33,9 +36,6 @@ int main(int argc, char **argv)
     int found = NO;     // YES if match was found
     int num;            // number of the first ident. chars
     
-    /* this line below checks that there are indeed arguments and
-        and that they/it preceeds with a dash '-'
-    */
     num = (--argc && (*++argv)[0] == '-') ? atoi(argv[0] + 1) : 6;
     root = NULL;
     while (getword(word, MAXWORD) != EOF)

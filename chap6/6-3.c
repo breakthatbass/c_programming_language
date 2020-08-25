@@ -5,26 +5,34 @@
  * */
 
 #include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
 
 struct word_info {
     char *word;
     int line;
 };
 
-char *ignore[] = { "and", "the", "a", "an", "of" };
+struct tnode {        // tree node
+    char *word;             // points to the text
+    int match;              // match found
+    struct tnode *left;     // left child
+    struct tnode *right;    // right child
+ };
 
 #define MAXWORD 100
+#define IGN_LEN 5
 
-// open file 
 
-// function
-// scan each line
-// keep track of line count
-// compare, add each word and line num to the struct array
+// compare: return 1 if s is in ignore array else return 0
+int compare(char *s)
+{
+    static char *ignore[IGN_LEN] = { "a", "an", "and", "are", "in", "is", "of", "or", "that ""the", "this", "to"};
 
-// function comapre
-// compare word to ignore words array
-// if any match, don't add to struc
-
-// function print
-// print the list of words with their corresponding line numbers
+    int i;
+    for (i = 0; i < IGN_LEN; i++) 
+        if (strcmp(ignore[i], s) == 0)  
+            return 1;
+    return 0;
+}
