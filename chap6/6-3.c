@@ -9,17 +9,17 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define MAXWORD 100
+#define IGN_LEN 12
+
 
 struct tnode {        // tree node
     char *word; 
-    int count;            // points to the text
-    int line;               // match found
+    int count;              // points to the text
+    int line[MAXWORD];      // match found
     struct tnode *left;     // left child
     struct tnode *right;    // right child
 };
-
-#define MAXWORD 100
-#define IGN_LEN 12
 
 struct tnode *addtree(struct tnode *, char *);
 void treeprint(struct tnode *);
@@ -35,7 +35,7 @@ int main()
   
     root = NULL;
     while (getword(word, MAXWORD) != EOF)
-        if (isalpha(word[0]) && compare(word[0] != 1))
+        if (isalpha(word[0]) && compare(word) != 1)
             root = addtree(root, word);
     treeprint(root);
     return 0;
@@ -50,7 +50,7 @@ int getword(char *word, int lim)
 
     do {
         c = getch();
-        if (c = '\n')
+        if (c == '\n')
             ++ln;
     }
 
@@ -77,17 +77,18 @@ char *str_dup(char *);
 // addtree: add a node with w, at or below p 
 struct tnode *addtree(struct tnode *p, char *w)
 {
-    int cond;
+    int cond, i;
 
     if (p == NULL) {       // a new word has arrived
         p = talloc();      // make a new node
         p->word = str_dup(w);
         p->count = 1;
-        p->line = ln;
+        p->line[0] = ln;
         p->left = p->right = NULL;
     } else if ((cond = strcmp(w, p->word)) == 0)  { // if word is already in tree...
         p->count++;
-        p->line = ln;
+        i = 0;
+        p->line[++i] = ln;
     }
     else if (cond < 0)      // less than into left subtree
         p->left = addtree(p->left, w);
@@ -106,6 +107,16 @@ int compare(char *s)
         if (strcmp(ignore[i], s) == 0)  
             return 1;
     return 0;
+}
+
+// treeprint: in-order print of tree
+void treeprint(struct tnode *p)
+{
+    if (p != NULL) {
+        treeprint(p->left);
+        printf("%4d %s\n", p->count, p->word);
+        treeprint(p->right);
+    }
 }
 
 // talloc: make a node

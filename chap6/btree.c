@@ -1,25 +1,25 @@
- #include <stdio.h>
- #include <ctype.h>
- #include <string.h>
- #include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
   
- struct tnode {        // tree node
+struct tnode {        // tree node
     char *word;             // points to the text
     int count;              // number of occurances
     struct tnode *left;     // left child
     struct tnode *right;    // right child
- };
+};
  
- #define MAXWORD 100
+#define MAXWORD 100
  
- struct tnode *addtree(struct tnode *, char *);
- void treeprint(struct tnode *);
- int getword(char *, int);
+struct tnode *addtree(struct tnode *, char *);
+void treeprint(struct tnode *);
+int getword(char *, int);
    
   
  // word frequency count
- int main()
- {
+int main()
+{
     struct tnode *root;
     char word[MAXWORD];
   
@@ -32,8 +32,8 @@
 } 
 
 
- struct tnode *talloc(void);
- char *str_dup(char *);
+struct tnode *talloc(void);
+char *str_dup(char *);
 
 
 // addtree: add a node with w, at or below p 
@@ -56,34 +56,34 @@ struct tnode *addtree(struct tnode *p, char *w)
 }
 
 
- // treeprint: in-order print of tree
- void treeprint(struct tnode *p)
- {
-     if (p != NULL) {
-         treeprint(p->left);
-         printf("%4d %s\n", p->count, p->word);
-         treeprint(p->right);
-     }
- }
+// treeprint: in-order print of tree
+void treeprint(struct tnode *p)
+{
+    if (p != NULL) {
+        treeprint(p->left);
+        printf("%4d %s\n", p->count, p->word);
+        treeprint(p->right);
+    }
+}
 
  
- // talloc: make a node
- struct tnode *talloc(void)
- {
-     return (struct tnode *) malloc(sizeof(struct tnode));
- }
+// talloc: make a node
+struct tnode *talloc(void)
+{
+    return (struct tnode *) malloc(sizeof(struct tnode));
+}
 
 
- // strdup: make a duplicate of s
- char *str_dup(char *s)
- {
+// strdup: make a duplicate of s
+char *str_dup(char *s)
+{
     char *p;
 
     p = (char *) malloc(strlen(s) + 1);  // +1 for '\0'
     if (p != NULL)
         strcpy(p, s);
     return p;
- }
+}
 
 // getword: get the word or character from input
 int getword(char *word, int lim)
