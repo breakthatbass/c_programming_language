@@ -55,6 +55,7 @@ int main()
     int n = 23;
     double f = 3.2;
     unsigned u = 12;
+
     
     minprintf("%s\n", s);
     minprintf("%d\n", n);
