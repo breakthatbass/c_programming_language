@@ -9,12 +9,26 @@
 
 #define MAXLINE 500
 
+void filecmp(FILE *fp1, FILE *fp2)
+{
+    char s1[MAXLINE], s2[MAXLINE];  // arrays used to store each line
+    int line = 1;                   // keep track of file lines
+
+    while ((fgets(s1, MAXLINE, fp1)) != '\0' 
+            && (fgets(s2, MAXLINE, fp2)) != '\0') {
+        if (strcmp(s1, s2) != 0) {
+            printf("file 1, line %d: %s\n", line, s1);
+            printf("file 2, line %d: %s\n", line, s2);
+            exit(0);
+        }
+        line++;
+    }
+}
+
 int main(int argc, char **argv)
 {
-    char *f1, *f2;      // files one and two
-    char *s1, *s2;      // string for comparing
+    char *f1, *f2; 
     FILE *fp1, *fp2; 
-    int line = 1;       // keep track of line of files
 
     // requires two files
     if (argc != 3){
@@ -33,17 +47,11 @@ int main(int argc, char **argv)
         exit(2);
     }
 
-    // read them line by line comparing them
-    while ((s1 = fgets(s1, 256, fp1)) != '\0' 
-            && (s2 = fgets(s2, 256, fp2)) != '\0') {
-        if (strcmp(s1, s2) != 0) {
-            printf("%d: %s\n", line, s1);
-            printf("%d: %s\n", line, s2);
-            exit(0);
-        }
-        line++;
-    }
+    // compare them
+    filecmp(fp1, fp2);
+
     fclose(fp1); 
     fclose(fp2); 
-    return 0; 
+
+    exit(0); 
 }
