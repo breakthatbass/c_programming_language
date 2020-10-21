@@ -40,4 +40,8 @@ int main()
     printf("%s\n", s);
 
     _free(&s);
+
+    // and then a test for exercise 8-7
+    // allocate more than MAXBYTES which is 10,000
+    char *too_much = _malloc(sizeof(char) * 11000);
 }

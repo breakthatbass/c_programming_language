@@ -1,4 +1,4 @@
-# for 8-6.c
+# for 8-6 and 8-7
 CC=gcc
 CFLAGS=-g -lm -std=c99 -pedantic
 SRC_FILES=malloc.c 8-6.c

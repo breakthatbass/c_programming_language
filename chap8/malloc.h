@@ -1,6 +1,8 @@
-#include <stdio.h>      // for NULL
+#include <stdio.h>          // for NULL
 
-#define NALLOC 1024     // minimum #units to request
+#define NALLOC 1024         // minimum #units to request
+
+#define MAXBYTES 10000      // for exercise 8.7
 
 typedef long Align;         // for alignment to long boundary
 

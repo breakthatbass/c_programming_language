@@ -5,6 +5,12 @@ void *_malloc(unsigned nbytes)
     Header *p, *prevp;
     unsigned nunits;
 
+    // exercise 8-7
+    if (nbytes > MAXBYTES) {
+        fprintf(stderr, "Too many bytes. %d is more than %d\n", nbytes, MAXBYTES);
+        return NULL;
+    }
+
     nunits = (nbytes+sizeof(Header) -1 )/sizeof(Header) + 1;
     if ((prevp = freep) == NULL) {      // no free list yet
         base.s.ptr = freep = prevp = &base;
