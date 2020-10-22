@@ -13,4 +13,4 @@ If you'd like to run the programs, download the repo
 git clone https://github.com/breakthatbass/c_programming_language.git
 ```
 
-There are no compiled executables in the repo but there are some ```Makefile```s for some of the larger programs. Otherwise, any of the files you wish to run would have to be individually compiled with comething like ```gcc 4-1.c```
+There are no compiled executables in the repo but there are some makefiles for some of the larger programs. Otherwise, any of the files you wish to run would have to be individually compiled with something like ```gcc 4-1.c```
