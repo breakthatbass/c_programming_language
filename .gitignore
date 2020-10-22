@@ -1,6 +1,8 @@
 *.swp
 *.pdf
 hashtable.c
+*.txt
+test.c
 
 # Prerequisites
 *.d
